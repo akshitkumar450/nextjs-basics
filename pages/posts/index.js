@@ -23,7 +23,7 @@ export async function getStaticProps() {
   // return an object and object should contains a props key which is also an object
   return {
     props: {
-      posts: data,
+      posts: data.slice(0, 3),
     },
   };
 }
