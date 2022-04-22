@@ -20,6 +20,7 @@ export default users;
 // we can write server-side code in getStaticProps
 // it will run at build time
 // during development getStaticProps will run on every request
+// html,js and json file are generated
 
 export async function getStaticProps() {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
