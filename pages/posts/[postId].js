@@ -10,22 +10,40 @@ function post({ post }) {
 export default post;
 // use it when we have dynamic links
 // provide values to support on dynamic page
+
+// dynamic generated paths by fetching post id
 export async function getStaticPaths() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const data = await response.json();
+  const paths = data.map((post) => {
+    return {
+      params: {
+        postId: `${post.id}`,
+      },
+    };
+  });
   return {
-    paths: [
-      {
-        params: { postId: "1" },
-      },
-      {
-        params: { postId: "2" },
-      },
-      {
-        params: { postId: "3" },
-      },
-    ],
+    paths: paths,
     fallback: false,
   };
 }
+// hardcoded the paths
+// export async function getStaticPaths() {
+//   return {
+//     paths: [
+//       {
+//         params: { postId: "1" },
+//       },
+//       {
+//         params: { postId: "2" },
+//       },
+//       {
+//         params: { postId: "3" },
+//       },
+//     ],
+//     fallback: false,
+//   };
+// }
 
 export async function getStaticProps(context) {
   // console.log(context);
