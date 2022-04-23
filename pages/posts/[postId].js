@@ -38,6 +38,7 @@ export default Post;
 // hardcoded the paths
 export async function getStaticPaths() {
   return {
+    // paths statically generated at build time
     paths: [
       {
         params: { postId: "1" },
@@ -53,23 +54,30 @@ export async function getStaticPaths() {
     // paths returned from getStaticPaths will be rendered to HTML files at build time by getStaticProps
     // any path not returned by getStaticPaths will 404 page
 
-    fallback: true,
+    // fallback: true,
     // paths returned from getStaticPaths will be rendered to HTML files at build time by getStaticProps
     // any path not returned by getStaticPaths will not be 404 page rather it will show fallback version of the page on first request
     // in background nextjs will statically generate the requested path HTML and JSON.this includes running getStaticProps
     // if some path which was not returned from path then getStaticProps run and statically generate HTML and JSON in background
     //when json file is generated this we swapped from fallback page to full page
+
+    fallback: "blocking",
+    // paths returned from getStaticPaths will be rendered to HTML files at build time by getStaticProps
+    // any path not returned by getStaticPaths will not 404 page instaead on first request nextjs will render the page on the server and return generated HTML
+    // no loading indicator is shown if path is not retured else page will be generated at server and shown
   };
 }
 
 export async function getStaticProps(context) {
   // console.log(context);
+  // getting the params from url
   const { params } = context;
   const response = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${params.postId}`
   );
   const data = await response.json();
   // if we have random id which do not have data
+  // fallback->true
   if (!data.id) {
     return {
       notFound: true,
