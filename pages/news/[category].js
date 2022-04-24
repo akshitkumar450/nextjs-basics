@@ -13,6 +13,7 @@ export default Category;
 export async function getServerSideProps(context) {
   const { params, req, res, query } = context;
   //   console.log(req, res);
+  // console.log(query, params);
   const response = await fetch(
     `http://localhost:4000/news?category=${params.category}`
   );

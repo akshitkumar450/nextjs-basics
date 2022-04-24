@@ -4,6 +4,15 @@ const nextConfig = {
   images: {
     domains: ["images.unsplash.com"],
   },
+  // redirects: async () => {
+  //   return [
+  //     {
+  //       source: "/",
+  //       destination: "https://www.google.com",
+  //       permanent: false,
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = nextConfig;
